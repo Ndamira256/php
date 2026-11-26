@@ -1,16 +1,30 @@
 <?php
 
-class Student
+abstract class Person {
+    protected string $name;
+    protected int $age;
+
+    public function __construct($name, $age){
+        $this->name = $name;
+        $this->age = $age;
+    }
+
+    abstract public function introduce();
+  
+    
+}
+
+class Student extends Person
 {
-    private $name;
-    private $age;
-    private $registrationNumber;
-    private $mathematicsMarks;
-    private $englishMarks;
-    private $scienceMarks;
+    private int $registrationNumber;
+    private int $mathematicsMarks;
+    private int $englishMarks;
+    private int $scienceMarks;
+    private static int $count = 0;
+    
 
 
-    public function __construct($name, $age, $registrationNumber, $mathematicsMarks, $englishMarks, $scienceMarks)
+    public function __construct(string $name, int $age, int $registrationNumber, int $mathematicsMarks, int $englishMarks, int $scienceMarks)
     {
         $this->name = $name;
         $this->age = $age;
@@ -76,11 +90,66 @@ class Student
         }
 
     }
+    #[Override]
+    public function introduce()
+    {
+        return "Hello my name is {$this->name}, i am {$this->age} years old" . PHP_EOL; 
+    }
+    public static function countStudents(){
+        return self::$count++ . PHP_EOL;
+    }
 }
 
-$student = new Student("Pancras", "21", "123", "95", "97", "99");
+Class Teacher extends Person
+{
+    private $schoolName;
 
-echo $student->displayDetails();
-echo $student->calculateAverage();
-echo $student->getGrade();
-echo $student->hasPassed();
+    public function __construct(string $name, int $age)
+    {
+        $this->name = $name;
+        $this->age = $age;
+    }
+
+    function introduce()
+    {
+        return "Hello my name is {$this->name} i am {$this->age} years old, i am a teacher" . PHP_EOL;
+    }
+
+}
+
+$student1 = new Student("Elvis", 17, 123, 95, 97, 90);
+$student2 = new Student("John", 19, 124, 70, 60, 48);
+$student3 = new Student("Doe", 18, 125, 50, 67, 70);
+$student4 = new Student("Emma", 16, 126, 75, 77, 78);
+$teacher = new Teacher("Mary", 34);
+
+
+
+echo $teacher->introduce();
+echo $student1->introduce();
+echo $student1->displayDetails();
+echo $student1->calculateAverage();
+echo $student1->getGrade();
+echo $student1->hasPassed();
+
+echo $student2->introduce();
+echo $student2->displayDetails();
+echo $student2->calculateAverage();
+echo $student2->getGrade();
+echo $student2->hasPassed();
+
+echo $student3->introduce();
+echo $student3->displayDetails();
+echo $student3->calculateAverage();
+echo $student3->getGrade();
+echo $student3->hasPassed();
+
+echo $student4->introduce();
+echo $student4->displayDetails();
+echo $student4->calculateAverage();
+echo $student4->getGrade();
+echo $student4->hasPassed();
+
+echo Student::countStudents();
+
+
