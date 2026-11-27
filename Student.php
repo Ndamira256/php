@@ -1,6 +1,7 @@
 <?php
 
-abstract class Person {
+abstract class Person 
+{
     protected string $name;
     protected int $age;
 
@@ -98,6 +99,11 @@ class Student extends Person
     public static function countStudents(){
         return self::$count++ . PHP_EOL;
     }
+  
+    public function greet()
+    {
+        throw new \Exception('Not implemented');
+    }
 }
 
 Class Teacher extends Person
@@ -110,10 +116,17 @@ Class Teacher extends Person
         $this->age = $age;
     }
 
-    function introduce()
+    public function introduce()
     {
         return "Hello my name is {$this->name} i am {$this->age} years old, i am a teacher" . PHP_EOL;
     }
+
+    
+    public function greet()
+    {
+        throw new \Exception('Not implemented');
+    }
+
 
 }
 
